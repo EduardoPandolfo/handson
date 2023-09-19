@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <script type="text/javascript">
+        function openNewTab(url) {
+            var newTab = window.open(url, '_blank');
+            newTab.focus();
+        }
+    </script>
+
+    <div id="footer">
+        <h:panelGrid columns="5" >
+            <h:panelGroup>
+                <h:outputLabel value="#{infoUsuario.info} / #{infoUsuario.authorities}"/>
+            </h:panelGroup>
+            <h:panelGroup>
+                <div class="authorization-div">
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <p:outputLabel value="Logado como administrador" />
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('GESTOR')">
+                        <p:outputLabel value="Logado como gestor" />
+                    </sec:authorize>
+                </div>
+            </h:panelGroup>
+
+            <h:form onsubmit="this.action='#{request.contextPath}/logout';" class="logout-form">
+                <p:commandButton value="Logout" ajax="false" />
+            </h:form>
+
+            <p:button value="Emitir Vouchers/Etiquetas" onclick="openNewTab('emissao.xhtml')" style="margin-top: 10px;" />
+
+            <h:panelGroup>
+                <h:graphicImage value="/img/aviao.png" width="50" height="50" />
+            </h:panelGroup>
+
+        </h:panelGrid>
+    </div>
+</h:body>
+</html>
