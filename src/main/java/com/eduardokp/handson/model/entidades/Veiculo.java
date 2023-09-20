@@ -1,10 +1,6 @@
-package com.eduardokp.handson.model.entidades.veiculo;
+package com.eduardokp.handson.model.entidades;
 
-import com.eduardokp.handson.model.entidades.Companhia;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +9,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "veiculo")
 public class Veiculo {
@@ -23,7 +20,7 @@ public class Veiculo {
     private Long id;
 
     @Column(name = "nome", length = 100, nullable = false)
-    private String name;
+    private String nome;
 
     @Column(name = "modelo", length = 30, nullable = false)
     private String modelo;
@@ -32,6 +29,7 @@ public class Veiculo {
     @JoinColumn(name = "companhia_id", nullable = false)
     private Companhia companhia;
 
-    @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY)
-    private List<VeiculoClasse> classes;
+    public Veiculo(Long id) {
+        this.id = id;
+    }
 }

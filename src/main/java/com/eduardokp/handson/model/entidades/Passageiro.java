@@ -1,5 +1,6 @@
 package com.eduardokp.handson.model.entidades;
 
+import com.eduardokp.handson.model.enums.Situacao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +35,11 @@ public class Passageiro {
     private String email;
 
     @CPF(message = "CPF inválido")
-    @Column(name = "cpf", nullable = false)
+    @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "situacao", nullable = false)
+    private Situacao situacao = Situacao.ATIVO;
 
 }

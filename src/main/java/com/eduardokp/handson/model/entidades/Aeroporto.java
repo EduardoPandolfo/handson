@@ -27,4 +27,8 @@ public class Aeroporto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cidade_id", nullable = false)
     private Cidade cidade;
+
+    public Aeroporto(Long id) {
+        this.id = id;
+    }
 }

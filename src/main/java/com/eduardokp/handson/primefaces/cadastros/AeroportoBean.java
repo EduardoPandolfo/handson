@@ -23,7 +23,7 @@ import java.util.List;
 public class AeroportoBean implements Serializable {
 
     private static final long serialVersionUID = 2L;
-    private final Logger logger = LoggerFactory.getLogger(AeroportoBean.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private AeroportoService aeroportoService;

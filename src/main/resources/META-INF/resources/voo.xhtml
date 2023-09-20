@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:g="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Cadastro de Voos</title>
+</h:head>
+<h:body>
+
+    <h:form id="formlist">
+
+        <ui:include src="/menu.xhtml"/>
+
+        <h:panelGrid columns="2">
+            <p:commandButton value="Pesquisar" action="#{vooBean.pesquisarVoos}" update="table"/>
+            <p:commandButton value="Novo" action="#{vooBean.novo()}" oncomplete="PF('editarDialog').show()"
+                             update="dialogVoo, cadForm"/>
+        </h:panelGrid>
+
+        <p:dataTable var="voo" value="#{vooBean.voos}" paginator="true" rows="10"
+                     paginatorPosition="bottom" id="table">
+
+            <p:column headerText="Código" width="15">
+                <h:outputText value="#{voo.id}"/>
+            </p:column>
+            <p:column headerText="Partida" width="100">
+                <h:outputText value="#{voo.partida.nome} / #{voo.partida.cidade.nome} - #{voo.partida.cidade.uf}"/>
+            </p:column>
+            <p:column headerText="Destino" width="100">
+                <h:outputText value="#{voo.destino.nome} / #{voo.destino.cidade.nome} - #{voo.destino.cidade.uf}"/>
+            </p:column>
+            <p:column headerText="Saída" width="100">
+                <h:outputText value="#{voo.saida}">
+                    <f:converter converterId="localDateTimeConverter"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Situação" width="20">
+                <h:outputText value="#{voo.situacao}"/>
+            </p:column>
+            <p:column headerText="Ação" width="30">
+                <p:commandButton value="Editar" action="#{vooBean.editar(voo.id)}"
+                                 oncomplete="PF('editarDialog').show()" update="dialogVoo, cadForm"/>
+                <p:commandButton value="Cancelar" action="#{vooBean.editar(voo.id)}"
+                                 oncomplete="PF('cancelarVoo').show()"/>
+            </p:column>
+
+        </p:dataTable>
+
+        <ui:include src="/footer.xhtml"/>
+    </h:form>
+
+    <p:dialog header="Editar Voo" widgetVar="editarDialog" resizable="true" modal="true" visible="false"
+              id="dialogVoo">
+
+        <h:form id="cadForm">
+            <g:panelGrid columns="2">
+                <p:outputLabel value="Código" rendered="!#{vooBean.novo}"/>
+                <p:inputText value="#{vooBean.voo.id}" rendered="!#{vooBean.novo}"/>
+
+                <p:outputLabel value="Data de saída" />
+                <h:panelGroup>
+                    <p:calendar value="#{vooBean.voo.saida}" pattern="dd/MM/yyyy HH:mm" showOn="button" converter="localDateTimeConverter"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Previsão de chegada" />
+                <h:panelGroup>
+                    <p:calendar value="#{vooBean.voo.previsaoChegada}" pattern="dd/MM/yyyy HH:mm" showOn="button" converter="localDateTimeConverter"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Partida"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="partida" value="#{vooBean.aeroportoPartidaId}" required="true" requiredMessage="Selecione um aeroporto">
+                        <f:selectItem itemLabel="Selecione um aeroporto" itemValue="0" />
+                        <f:selectItems value="#{vooBean.aeroportos}" var="partida" itemValue="#{partida.id}" itemLabel="#{partida.nome}" />
+                    </p:selectOneMenu>
+                    <p:message for="partida" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Destino"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="destino" value="#{vooBean.aeroportoDestinoId}" required="true" requiredMessage="Selecione um aeroporto">
+                        <f:selectItem itemLabel="Selecione um aeroporto" itemValue="0" />
+                        <f:selectItems value="#{vooBean.aeroportos}" var="destino" itemValue="#{destino.id}" itemLabel="#{destino.nome}" />
+                    </p:selectOneMenu>
+                    <p:message for="destino" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Companhia"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="companhia" value="#{vooBean.companhiaId}" required="true" requiredMessage="Selecione uma companhia">
+                        <f:selectItem itemLabel="Selecione uma companhia" itemValue="0" />
+                        <f:selectItems value="#{vooBean.companhias}" var="companhia" itemValue="#{companhia.id}" itemLabel="#{companhia.nome}"/>
+                        <p:ajax event="change" update="veiculo" />
+                    </p:selectOneMenu>
+                    <p:message for="companhia" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Veículo"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="veiculo" value="#{vooBean.veiculoId}" required="true" requiredMessage="Selecione um veiculo">
+                        <f:selectItem itemLabel="Selecione um veiculo" itemValue="0" />
+                        <f:selectItems value="#{vooBean.veiculos}" var="veiculo" itemValue="#{veiculo.id}" itemLabel="#{veiculo.id} - #{veiculo.nome}"/>
+                    </p:selectOneMenu>
+                    <p:message for="veiculo" />
+                </h:panelGroup>
+            </g:panelGrid>
+
+            <h:messages id="erroEditar" showDetail="true" styleClass="erros"/>
+
+            <h:panelGrid columns="2">
+                <p:commandButton value="Salvar" action="#{vooBean.salvar}"
+                                 update="formlist:table, erroEditar"
+                />
+                <p:commandButton value="Sair" oncomplete="PF('editarDialog').hide()"/>
+            </h:panelGrid>
+        </h:form>
+
+    </p:dialog>
+
+    <p:dialog header="Cancelar Voo" widgetVar="cancelarVoo" resizable="true" modal="true"
+              visible="false">
+        <h:form id="cancelForm">
+            <h:outputText value="Tem certeza que deseja cancelar?"/>
+
+            <h:messages id="erroCancelar" showDetail="true" styleClass="erros"/>
+
+            <g:panelGrid columns="2">
+                <p:commandButton value="Sim" action="#{vooBean.cancelar()}"
+                                 update="formlist:table, erroCancelar"/>
+                <p:commandButton value="Sair" oncomplete="PF('cancelarVoo').hide()"/>
+            </g:panelGrid>
+        </h:form>
+    </p:dialog>
+
+</h:body>
+
+</html>

@@ -20,4 +20,8 @@ public class Companhia {
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
+
+    public Companhia(Long id) {
+        this.id = id;
+    }
 }

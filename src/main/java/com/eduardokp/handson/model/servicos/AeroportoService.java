@@ -15,7 +15,6 @@ public class AeroportoService {
     @Autowired
     private AeroportoRepository repository;
 
-
     @Transactional
     public Aeroporto persistir(Aeroporto aeroporto) {
         Aeroporto duplicado = repository.findUserByIata(aeroporto.getIata());

@@ -2,6 +2,9 @@ package com.eduardokp.handson.model.entidades.voo;
 
 import com.eduardokp.handson.model.entidades.Aeroporto;
 import com.eduardokp.handson.model.entidades.Companhia;
+import com.eduardokp.handson.model.entidades.Veiculo;
+import com.eduardokp.handson.model.enums.Classe;
+import com.eduardokp.handson.model.enums.Situacao;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,8 +40,16 @@ public class Voo {
     @Column(name = "saida", nullable = false)
     private LocalDateTime saida;
 
-    @Column(name = "previsaochegada", nullable = false)
+    @Column(name = "previsaochegada")
     private LocalDateTime previsaoChegada;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "situacao", nullable = false)
+    private Situacao situacao = Situacao.ATIVO;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "veiculo_id", nullable = false)
+    private Veiculo veiculo;
 
     @OneToMany(mappedBy = "voo", fetch = FetchType.LAZY)
     private List<VooClasse> classes;
