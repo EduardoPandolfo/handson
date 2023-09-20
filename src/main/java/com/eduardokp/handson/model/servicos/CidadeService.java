@@ -15,9 +15,8 @@ public class CidadeService {
     @Autowired
     private CidadeRepository repository;
 
-
     /**
-        getALl cidades sorted by nome
+        getAll cidades sorted by nome
      */
     public List<Cidade> getAll() {
         return repository.findAll().stream().sorted(Comparator.comparing(Cidade::getNome)).collect(Collectors.toList());
