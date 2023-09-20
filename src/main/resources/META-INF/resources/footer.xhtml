@@ -14,26 +14,16 @@
     </script>
 
     <div id="footer">
-        <h:panelGrid columns="5" >
+        <h:panelGrid columns="4" >
             <h:panelGroup>
-                <h:outputLabel value="#{infoUsuario.info} / #{infoUsuario.authorities}"/>
-            </h:panelGroup>
-            <h:panelGroup>
-                <div class="authorization-div">
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <p:outputLabel value="Logado como administrador" />
-                    </sec:authorize>
-                    <sec:authorize access="hasRole('GESTOR')">
-                        <p:outputLabel value="Logado como gestor" />
-                    </sec:authorize>
-                </div>
+                <h:outputLabel value="#{infoUsuario.info}"/>
             </h:panelGroup>
 
             <h:form onsubmit="this.action='#{request.contextPath}/logout';" class="logout-form">
                 <p:commandButton value="Logout" ajax="false" />
             </h:form>
 
-            <p:button value="Emitir Vouchers/Etiquetas" onclick="openNewTab('emissao.xhtml')" style="margin-top: 10px;" />
+            <p:button value="Emitir Vouchers/Etiquetas" onclick="openNewTab('emissao.xhtml')" style="margin-top: 10px;"  />
 
             <h:panelGroup>
                 <h:graphicImage value="/img/aviao.png" width="50" height="50" />
