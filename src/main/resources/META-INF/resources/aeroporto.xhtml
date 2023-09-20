@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:g="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Cadastro de aeroportos</title>
+</h:head>
+<h:body>
+
+    <h:form id="formlist">
+
+        <ui:include src="/menu.xhtml"/>
+
+        <h:panelGrid columns="2">
+            <p:commandButton value="Pesquisar" action="#{aeroportoBean.pesquisarAeroportos()}" update="table"/>
+            <p:commandButton value="Novo" action="#{aeroportoBean.novo()}" oncomplete="PF('editarDialog').show()"
+                             update="dialogAeroporto, cadForm"/>
+        </h:panelGrid>
+
+        <p:dataTable var="aeroporto" value="#{aeroportoBean.aeroportos}" paginator="true" rows="10"
+                     paginatorPosition="bottom" id="table">
+
+            <p:column headerText="Código" width="15">
+                <h:outputText value="#{aeroporto.id}"/>
+            </p:column>
+            <p:column headerText="Nome" width="100">
+                <h:outputText value="#{aeroporto.nome}"/>
+            </p:column>
+            <p:column headerText="Cidade - UF" width="100">
+                <h:outputText value="#{aeroporto.cidade.nome} - #{aeroporto.cidade.uf}"/>
+            </p:column>
+            <p:column headerText="Ação" width="30">
+                <p:commandButton value="Editar" action="#{aeroportoBean.editar(aeroporto.id)}"
+                                 oncomplete="PF('editarDialog').show()" update="dialogAeroporto, cadForm"/>
+                <p:commandButton value="Excluir" action="#{aeroportoBean.editar(aeroporto.id)}"
+                                 oncomplete="PF('excluirAeroporto').show()"/>
+            </p:column>
+
+        </p:dataTable>
+
+        <ui:include src="/footer.xhtml"/>
+    </h:form>
+
+    <p:dialog header="Editar Aeroporto" widgetVar="editarDialog" resizable="true" modal="true" visible="false"
+              id="dialogAeroporto">
+
+        <h:form id="cadForm">
+            <g:panelGrid columns="2">
+                <p:outputLabel value="Código" rendered="!#{aeroportoBean.novo}"/>
+                <p:inputText value="#{aeroportoBean.aeroporto.id}" rendered="!#{aeroportoBean.novo}"/>
+
+                <p:outputLabel value="Nome"/>
+                <h:panelGroup>
+                    <p:inputText id="nome" value="#{aeroportoBean.aeroporto.nome}" required="true" requiredMessage="Campo obrigatório"/>
+                    <p:message for="nome" />
+                </h:panelGroup>
+
+
+                <p:outputLabel value="Iata"/>
+                <h:panelGroup>
+                    <p:inputText id="iata" value="#{aeroportoBean.aeroporto.iata}" required="true"
+                                 requiredMessage="Campo obrigatório" />
+                    <p:message for="iata" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Cidade"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="cidade" value="#{aeroportoBean.cidadeSelecionadaId}" required="true" requiredMessage="Selecione uma cidade">
+                        <f:selectItem itemLabel="Selecione uma cidade" itemValue="0" />
+                        <f:selectItems value="#{aeroportoBean.cidades}" var="cidade" itemValue="#{cidade.id}" itemLabel="#{cidade.nome} - #{cidade.uf}" />
+                    </p:selectOneMenu>
+                    <p:message for="cidade" />
+                </h:panelGroup>
+            </g:panelGrid>
+
+            <h:messages id="erroEditar" showDetail="true" styleClass="erros"/>
+
+            <h:panelGrid columns="2">
+                <p:commandButton value="Salvar" action="#{aeroportoBean.salvar}"
+                                 update="formlist:table, erroEditar"
+                />
+                <p:commandButton value="Sair" oncomplete="PF('editarDialog').hide()"/>
+            </h:panelGrid>
+        </h:form>
+
+    </p:dialog>
+
+    <p:dialog header="Excluir Aeroporto" widgetVar="excluirAeroporto" resizable="true" modal="true"
+              visible="false">
+        <h:form id="delForm">
+            <h:outputText value="Tem certeza que deseja excluir?"/>
+
+            <h:messages id="erroExcluir" showDetail="true" styleClass="erros"/>
+
+            <g:panelGrid columns="2">
+                <p:commandButton value="Excluir" action="#{aeroportoBean.excluir()}"
+                                 update="formlist:table, erroExcluir"/>
+                <p:commandButton value="Sair" oncomplete="PF('excluirAeroporto').hide()"/>
+            </g:panelGrid>
+        </h:form>
+    </p:dialog>
+
+</h:body>
+
+</html>
+
