@@ -1,4 +1,4 @@
-package com.eduardokp.handson.entidades;
+package com.eduardokp.handson.model.entidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

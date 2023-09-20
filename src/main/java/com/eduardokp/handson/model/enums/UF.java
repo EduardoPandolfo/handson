@@ -1,4 +1,4 @@
-package com.eduardokp.handson.enums;
+package com.eduardokp.handson.model.enums;
 
 public enum UF {
     AC("Acre"),

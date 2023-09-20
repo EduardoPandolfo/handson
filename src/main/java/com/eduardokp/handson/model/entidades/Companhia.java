@@ -1,6 +1,5 @@
-package com.eduardokp.handson.entidades;
+package com.eduardokp.handson.model.entidades;
 
-import com.eduardokp.handson.enums.UF;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,18 +10,14 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Builder
-@Table(name = "cidade")
-public class Cidade {
+@Table(name = "companhia")
+public class Companhia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cidade_id")
+    @Column(name = "companhia_id")
     private Long id;
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
-
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "uf", nullable = false)
-    private UF uf;
 }

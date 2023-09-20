@@ -1,7 +1,7 @@
-package com.eduardokp.handson.entidades;
+package com.eduardokp.handson.model.entidades;
 
-import com.eduardokp.handson.entidades.voo.Voo;
-import com.eduardokp.handson.enums.Classe;
+import com.eduardokp.handson.model.entidades.voo.Voo;
+import com.eduardokp.handson.model.enums.Classe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

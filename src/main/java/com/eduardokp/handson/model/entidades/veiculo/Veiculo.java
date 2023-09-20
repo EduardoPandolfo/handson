@@ -1,6 +1,6 @@
-package com.eduardokp.handson.entidades.veiculo;
+package com.eduardokp.handson.model.entidades.veiculo;
 
-import com.eduardokp.handson.entidades.Companhia;
+import com.eduardokp.handson.model.entidades.Companhia;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

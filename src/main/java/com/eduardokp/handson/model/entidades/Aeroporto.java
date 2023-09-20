@@ -1,4 +1,4 @@
-package com.eduardokp.handson.entidades;
+package com.eduardokp.handson.model.entidades;
 
 import lombok.*;
 
@@ -24,7 +24,7 @@ public class Aeroporto {
     @Column(name = "iata", nullable = false, unique = true)
     private String iata;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cidade_id", nullable = false)
     private Cidade cidade;
 }

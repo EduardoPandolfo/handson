@@ -1,8 +1,7 @@
-package com.eduardokp.handson.entidades.voo;
+package com.eduardokp.handson.model.entidades.voo;
 
-import com.eduardokp.handson.entidades.Aeroporto;
-import com.eduardokp.handson.entidades.Companhia;
-import com.eduardokp.handson.entidades.veiculo.VeiculoClasse;
+import com.eduardokp.handson.model.entidades.Aeroporto;
+import com.eduardokp.handson.model.entidades.Companhia;
 import lombok.*;
 
 import javax.persistence.*;

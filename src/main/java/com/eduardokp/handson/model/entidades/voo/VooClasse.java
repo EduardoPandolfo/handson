@@ -1,7 +1,6 @@
-package com.eduardokp.handson.entidades.voo;
+package com.eduardokp.handson.model.entidades.voo;
 
-import com.eduardokp.handson.entidades.veiculo.Veiculo;
-import com.eduardokp.handson.enums.Classe;
+import com.eduardokp.handson.model.enums.Classe;
 import lombok.*;
 
 import javax.persistence.*;

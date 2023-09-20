@@ -1,6 +1,6 @@
-package com.eduardokp.handson.entidades.veiculo;
+package com.eduardokp.handson.model.entidades.veiculo;
 
-import com.eduardokp.handson.enums.Classe;
+import com.eduardokp.handson.model.enums.Classe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

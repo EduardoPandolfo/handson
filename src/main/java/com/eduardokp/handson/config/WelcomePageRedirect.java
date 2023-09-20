@@ -1,4 +1,4 @@
-package com.eduardokp.handson.primefaces;
+package com.eduardokp.handson.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
