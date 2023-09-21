@@ -4,13 +4,6 @@ Configuração para execução da API na Amazon AWS - Modelo EC2
 
 ## Iniciar uma instância quickstart do Ubuntu
 
-- Utilizando qualquer imagem de máquina recomendada.
-- Tipo de instância t2.micro.
-- Criar configuração TCP customizada para o intervalo de portas 8080, aceitando conexões de qualquer IP.
-
-Para fazer a conexão através de SSH da instância criada, execute o seguinte comando (certifique-se de executá-lo na pasta onde foi feito o download da chave privada):
-
-Iniciar uma instância quickstart do ubuntu
 - utilizando qualquer imagem de maquina recomendada
 - tipo de instância t2.micro
 - criar configuração tcp customizada para o intervalo de portas 8080, aceitando conexões de qualquer ip 
