@@ -1,4 +1,4 @@
-Aplicação JSF com JoinFaces, Spring com login em memória fixo.
+Aplicação JSF com JoinFaces, Primefaces, Spring com login em memória fixo.
 
 Configuração para execução da API na Amazon AWS - Modelo EC2
 
